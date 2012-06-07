@@ -1,4 +1,4 @@
-class global.Engine
+class root.Engine
   constructor: ->
     @gamestate = {}
     @loaded = false

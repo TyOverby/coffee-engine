@@ -3,4 +3,4 @@ class global.Game extends Engine
     super()
     console.log("loading from Game")
   update: ->
-    # All of the updates for the game go here
+    throw "update() from Game not yet implemented"

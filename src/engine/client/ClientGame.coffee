@@ -1,8 +1,10 @@
 class global.Client extends Game
+
+  # Prepare the camera, init game state
   load: ->
-    # Do things like load the canvas here
     super()
 
+  # Make updates to the state of the game
   update: ->
     super()
     this.render()

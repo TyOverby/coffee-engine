@@ -1,5 +1,5 @@
 # Add more to this as you need more
-class global.Vector2f
+class root.Vector2f
   constructor:(x,y)->
     @x = x
     @y = y
