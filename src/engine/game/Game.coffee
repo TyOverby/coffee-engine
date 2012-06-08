@@ -1,4 +1,4 @@
-class global.Game extends Engine
+class Game extends Engine
   load: ->
     super()
     console.log("loading from Game")

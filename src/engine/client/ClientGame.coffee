@@ -1,4 +1,4 @@
-class global.Client extends Game
+class Client extends Game
 
   # Prepare the camera, init game state
   load: ->
@@ -11,4 +11,4 @@ class global.Client extends Game
 
   render: ->
     # do rendering here
-    console.log("render")
+    throw "render() from Client is not yet implemented"

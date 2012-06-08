@@ -1,4 +1,4 @@
-class root.Engine
+class Engine
   constructor: ->
     @gamestate = {}
     @loaded = false
@@ -10,11 +10,11 @@ class root.Engine
 
   loop: ->
     console.log "looping from Engine"
-    this.update()
-    global.requestAnimationFrame((time)=> this.loop())
+    @update()
+    window.requestAnimationFrame((time)=> this.loop())
 
   play: ->
     if not @loaded
-      this.load()
+      @load()
 
-    this.loop()
+    @loop()

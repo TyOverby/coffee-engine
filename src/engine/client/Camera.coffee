@@ -5,11 +5,11 @@ class Camera
 
   # Returns the width of the view-port
   getWidth: ->
-    do @canvas.getWidth
+    @pane.canvas.width
 
   # Returns the height of the view-port
   getHeight: ->
-    do @canvas.getHeight
+    @pane.canvas.height
 
   inBounds: (position, radius) ->
     left  = position.x - @pos.x + radius > 0
@@ -27,12 +27,11 @@ class Camera
     @pos.plusEquals amount
 
   _half: ->
-    {
       x: @getWidth()  / 2
       y: @getHeight() / 2
-    }
 
   setCenter: (value) ->
     @pos = value.minusEquals(_half())
 
-
+  clear: ->
+    @pane.clearRect 0, 0, @getWidth(), @getHeight()

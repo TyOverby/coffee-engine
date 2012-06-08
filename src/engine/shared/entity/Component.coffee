@@ -1,6 +1,7 @@
-class root.Component
-  update: (deltat) ->
-    throw "update() not implemented yet"
+class Component
+  # Other methods that Component can have:
+  # update(deltat)
+  # render(camera)
 
   setParent: (parent) ->
     @parent = parent

@@ -4,21 +4,25 @@
 		<title>
 			index.html
 		</title>
-
-    <script src="../bin/preload.js"></script>
-
-    <script src="../bin/engine/GameMath.js"></script>
-    <script src="../bin/engine/Engine.js"></script>
-
-		<script src="../bin/game/Game.js"></script>
-
-    <script src="../bin/client/Draw.js"></script>
-		<script src="../bin/client/ClientGame.js"></script>
 	</head>
 
 	<body style="background-color:black;">
-		<canvas id="canvas" width="500" height="500" onclick="play_game()"></canvas>
+		<canvas id="canvas" width="1000" height="800" onclick="play_game()"></canvas>:w
 
-        <br />
-    </body>
-</html>
+<script src="../bin/engine/preload.js"></script>
+<script src="../bin/engine/shared/Engine.js"></script>
+<script src="../bin/engine/shared/entity/Entity.js"></script>
+<script src="../bin/engine/game/Game.js"></script>
+<script src="../bin/implementation/game/Star.js"></script>
+<script src="../bin/implementation/game/Galaxy.js"></script>
+<script src="../bin/engine/shared/entity/Component.js"></script>
+<script src="../bin/engine/shared/entity/scomponents/RenderComponent.js"></script>
+<script src="../bin/engine/shared/Vector2f.js"></script>
+<script src="../bin/engine/shared/MathUtils.js"></script>
+<script src="../bin/engine/shared/entity/scomponents/DynamicComponent.js"></script>
+<script src="../bin/engine/client/Pane.js"></script>
+<script src="../bin/engine/client/ClientGame.js"></script>
+<script src="../bin/engine/client/Camera.js"></script>
+<script src="../bin/implementation/client/ClientGalaxy.js"></script>
+
+</body></html>
