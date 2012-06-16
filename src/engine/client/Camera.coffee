@@ -20,7 +20,7 @@ class Camera
 
     left && right && top && bot
 
-  getModPos: (enityPos) ->
+  getModPos: (entityPos) ->
     entityPos.minus(@pos)
 
   move: (amount) ->
@@ -32,6 +32,3 @@ class Camera
 
   setCenter: (value) ->
     @pos = value.minusEquals(_half())
-
-  clear: ->
-    @pane.clearRect 0, 0, @getWidth(), @getHeight()

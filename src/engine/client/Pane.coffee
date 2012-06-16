@@ -7,6 +7,12 @@ CanvasRenderingContext2D::fillCircle = (position,radius) ->
   this.fill()
   this.closePath()
 
+CanvasRenderingContext2D::strokeCircle = (position,radius) ->
+  this.beginPath()
+  this.arc(position.x, position.y, radius, 0, Math.PI * 2, true)
+  this.stroke()
+  this.closePath()
+
 CanvasRenderingContext2D::strokeLine = (p1, p2) ->
   this.beginPath()
   this.moveTo(p1.x, p1.y)
@@ -20,6 +26,6 @@ CanvasRenderingContext2D::strokeVector = (position, velocity) ->
     position = new Vector2f 0, 0
   @strokeLine position, position.plus velocity
 
-CanvasRenderingContext2D::fill = (color) ->
+CanvasRenderingContext2D::clear = (color) ->
   @fillStyle = color
   @fillRect 0, 0, @.canvas.width, @.canvas.height

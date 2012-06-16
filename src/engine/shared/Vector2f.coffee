@@ -19,7 +19,7 @@ class Vector2f
     this
 
   minus: (other)->
-    new Vector2f @x-other.y, @y-other.y
+    new Vector2f @x-other.x, @y-other.y
 
   minusEquals: (other)->
     @x -= other.x

@@ -1,10 +1,10 @@
 root = exports ? this
 
-window.requestAnimationFrame ||=
-  webkitRequestAnimationFrame ||
-  mozRequestAnimationFrame    ||
-  oRequestAnimationFrame      ||
-  msRequestAnimationFrame     ||
+root.requestAnimationFrame ||=
+  root.webkitRequestAnimationFrame ||
+  root.mozRequestAnimationFrame    ||
+  root.oRequestAnimationFrame      ||
+  root.msRequestAnimationFrame     ||
   (callback, element) ->
     setTimeout( ->
       callback(+new Date()) 1000 / 60)
