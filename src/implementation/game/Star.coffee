@@ -2,8 +2,9 @@ class Star extends Entity
   constructor: (position, size, affiliation) ->
     super()
 
-    @position = position.scale(10)
+    @position = position
     @size = size
+    @filled = Math.random()
 
     @letter = "b"
 
@@ -13,22 +14,21 @@ class Star extends Entity
     @addComponent new RenderComponent (camera) =>
       pane = camera.pane
 
-      size = @size*10
-      dispPosition = camera.getModPos(@position)
+      size = @size * camera.scale
+      dispPosition = camera.gameToScreen(@position)
+
+      # The opaque ring
+      pane.fillStyle= @color.darkened(0).setOpacity(0.3).toString()
+      pane.fillCircle(dispPosition,size)
 
       # The big center circle
       pane.fillStyle = @color.toString()
-      pane.fillCircle(dispPosition, size)
-
-      # The opaque ring
-      pane.strokeStyle = @color.darkened(0).setOpacity(0.5).toString()
-      pane.lineWidth = 10
-      pane.strokeCircle(dispPosition,size+5)
+      pane.fillCircle(dispPosition, size * @filled)
 
       # the outer ring
-      pane.strokeStyle = @color.toString()
-      pane.lineWidth = 3
-      pane.strokeCircle(dispPosition,size+10)
+      # pane.strokeStyle = @color.toString()
+      # pane.lineWidth = 3
+      # pane.strokeCircle(dispPosition,size-8)
 
 
   update: (deltat) ->

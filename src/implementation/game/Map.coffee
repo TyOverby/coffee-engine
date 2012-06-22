@@ -9,14 +9,14 @@ class Map
         },
 
         {
-          pos: [10,10]
+          pos: [1,1]
           size: 3
           aff: 1
         },
 
         {
-          pos: [10,20]
-          size: 5
+          pos: [1,2]
+          size: 7
           aff: 2
         }
       ]

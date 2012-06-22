@@ -10,6 +10,9 @@ class Vector2f
   equals:(other) ->
     @x==other.x && @y ==other.y
 
+  toString: ->
+    "(" + @x + ", " + @y + ")"
+
   plus: (other)->
     new Vector2f @x+other.x, @y+other.y
 

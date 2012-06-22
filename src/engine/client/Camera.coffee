@@ -2,6 +2,7 @@ class Camera
   constructor: (canvasId,centerPos)->
     @pane = new Pane canvasId
     @pos = centerPos
+    @scale = 10
 
   # Returns the width of the view-port
   getWidth: ->
@@ -20,15 +21,22 @@ class Camera
 
     left && right && top && bot
 
-  getModPos: (entityPos) ->
-    entityPos.minus(@pos)
+  gameToScreen: (entityPos) ->
+    entityPos.minus(@pos).scale(@scale)
+
+  screenToGame: (screenPos) ->
+    screenPos.scale(1/@scale).plus(@pos)
 
   move: (amount) ->
     @pos.plusEquals amount
 
   _half: ->
-      x: @getWidth()  / 2
-      y: @getHeight() / 2
+      new Vector2f @getWidth()  / 2,
+                   @getHeight() / 2
+
+  getCenter: ->
+    @screenToGame(@_half())
 
   setCenter: (value) ->
-    @pos = value.minusEquals(_half())
+    @pos = value
+    @pos.minusEquals(@_half().scaled(1/@scale))
