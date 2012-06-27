@@ -12,9 +12,6 @@ class EventListener
   onmousedown: (e) ->
     @_btns_down[e.which] = true
     @prevent e
-    console.log "~~~~~"
-    console.log(@getOffset(e).toString())
-    console.log(@camera.screenToGame(@getOffset(e)).toString())
 
   onmouseup: (e) ->
     @_btns_down[e.which] = false

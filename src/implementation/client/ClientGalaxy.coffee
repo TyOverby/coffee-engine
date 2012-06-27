@@ -13,10 +13,12 @@ class ClientGalaxy extends Galaxy
     pane = @camera.pane
 
     # Paint the whole screen blue
-    pane.clear "#e7ebf2"
+    #pane.clear "#e7ebf2"
+    pane.clear "black"
 
     # Start drawing the lines
-    pane.strokeStyle = "#c4cde0"
+    #pane.strokeStyle = "#c4cde0"
+    pane.strokeStyle = "rgba(50,50,50,0.5)"
     pane.lineWidth = 1
 
     startPos = @camera.pos.scaled(@camera.scale)
@@ -34,9 +36,9 @@ class ClientGalaxy extends Galaxy
       star.render @camera
 
     pane.font = "30pt helvetica"
-    pane.fillStyle = "black"
+    pane.fillStyle = "white"
     pane.strokeStyle = "rgba(255,255,255,0.75)"
 
-    pane.lineWidth = 4
-    pane.strokeText("fps: "+@fps, 0, 30)
+    pane.lineWidth = 0
+    #pane.strokeText("fps: "+@fps, 0, 30)
     pane.fillText("fps: "+@fps, 0, 30)

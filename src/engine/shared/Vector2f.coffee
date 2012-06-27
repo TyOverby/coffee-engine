@@ -3,6 +3,7 @@ class Vector2f
   constructor:(x,y)->
     @x = x
     @y = y
+    this
 
   clone: ->
     new Vector2f @x, @y
@@ -37,13 +38,15 @@ class Vector2f
   scaled: (scalar)->
     new Vector2f @x*scalar, @y*scalar
 
-  normalise: ->
-    @x /=@magnitude()
-    @y /=@magnitude()
+  normalize:  ->
+    len = @magnitude()
+    @x /= len
+    @y /= len
     this
 
-  normalised: ->
-    new Vector2f @x/@magnitude(), @y/@magnitude()
+  normalized: ->
+    len = @magnitude()
+    new Vector2f @x / len, @y / len
 
   invert: ->
     @x = -@x
@@ -53,12 +56,32 @@ class Vector2f
   inverted: ->
     new Vector2f -@x, -@y
 
+  corner: ->
+    oldX = @x
+    @x = @y
+    @y = -oldX
+    this
+
+  cornered: ->
+    new Vector2f(@y, -@x)
+
   magnitudeSquared: ->
     @x*@x + @y*@y
 
+  getTheta: ->
+    theta = Math.atan2(@y, @x)
+    if (theta < Math.PI*-2) || (theta > Math.PI*2)
+      theta = theta % 360
+    if theta < 0
+      theta += Math.PI*2
+    theta
+
+  setMagnitude: (newMag) ->
+    @normalize()
+    @scale(newMag)
+
   magnitude: ->
     Math.sqrt @magnitudeSquared()
-
 
   dot:(other) ->
     @x*other.x + @y*other.y

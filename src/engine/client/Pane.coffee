@@ -29,3 +29,17 @@ CanvasRenderingContext2D::strokeVector = (position, velocity) ->
 CanvasRenderingContext2D::clear = (color) ->
   @fillStyle = color
   @fillRect 0, 0, @.canvas.width, @.canvas.height
+
+CanvasRenderingContext2D::drawDot = (position) ->
+  this.fillCircle(position, 5)
+
+CanvasRenderingContext2D::fillWedge = (c1, c2, r1, r2, t1, t2, dist) ->
+  this.beginPath()
+  this.arc(c1.x, c1.y, r1, t1, t1+Math.PI, true)
+  this.arc(c2.x, c2.y, r2, t2, t2+Math.PI, true)
+  this.stroke()
+  this.closePath()
+
+
+
+

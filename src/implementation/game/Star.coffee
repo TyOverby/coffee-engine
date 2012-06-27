@@ -1,12 +1,12 @@
 class Star extends Entity
-  constructor: (position, size, affiliation) ->
+  constructor: (id, position, size, affiliation) ->
     super()
 
+    @id = id
     @position = position
     @size = size
     @filled = Math.random()
-
-    @letter = "b"
+    @neighbors = []
 
     @color = new Color.randGrey(150,175)
     @setOwner(affiliation)
@@ -25,11 +25,48 @@ class Star extends Entity
       pane.fillStyle = @color.toString()
       pane.fillCircle(dispPosition, size * @filled)
 
-      # the outer ring
-      # pane.strokeStyle = @color.toString()
-      # pane.lineWidth = 3
-      # pane.strokeCircle(dispPosition,size-8)
+      # vector towards the neighbors
+      for neighbor in @neighbors
+        getFeet = (center, towards, size)->
+          foot1 = towards.cornered().setMagnitude(size)
+          foot2 = foot1.inverted()
 
+          center.
+
+        towardsNeighbor = neighbor.position.minus(this.position)
+        pane.strokeStyle = "green"
+        dispNeighbor = camera.gameToScreen(neighbor.position)
+
+        foot1 = towardsNeighbor.cornered().normalize().scale(size)
+        foot2 = foot1.inverted()
+
+        dist = dispNeighbor.minus(dispPosition).magnitude()
+        nextCenterV = towardsNeighbor.clone().setMagnitude(dist/3)
+        nextCenter = dispPosition.plus(nextCenterV)
+        nextTowards = nextCenterV.clone()
+
+        nFoot1 = nextTowards.cornered().normalize().scale(neighbor.size * camera.scale)
+        nFoot2 = nFoot1.inverted()
+
+        nPos1 = dispPosition.plus(nFoot1)
+        nPos2 = dispPosition.plus(nFoot2)
+        #pane.strokeStyle = "green"
+        #pane.strokeVector(dispPosition,nextCenter)
+        #pane.strokeVector(dispPosition, foot1)
+        #pane.strokeVector(dispPosition, foot2)
+
+        #pos1 = dispPosition.plus(foot1)
+        #pos2 = dispPosition.plus(foot2)
+
+        pane.drawDot(nPos1)
+        pane.drawDot(nPos2)
+
+        pane.strokeStyle = "red"
+        pane.fillWedge(dispPosition, dispNeighbor, size, 10, foot2.getTheta(), foot2.getTheta(),0)
+
+
+  addNeighbor: (star) ->
+    @neighbors.push(star)
 
   update: (deltat) ->
     super(deltat)
