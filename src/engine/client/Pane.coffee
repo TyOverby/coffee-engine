@@ -33,11 +33,12 @@ CanvasRenderingContext2D::clear = (color) ->
 CanvasRenderingContext2D::drawDot = (position) ->
   this.fillCircle(position, 5)
 
-CanvasRenderingContext2D::fillWedge = (c1, c2, r1, r2, t1, t2, dist) ->
+CanvasRenderingContext2D::fillWedge = (center, radius, distance, degree, p1, p2, footP) ->
   this.beginPath()
-  this.arc(c1.x, c1.y, r1, t1, t1+Math.PI, true)
-  this.arc(c2.x, c2.y, r2, t2, t2+Math.PI, true)
-  this.stroke()
+  this.arc(center.x, center.y, radius + distance, degree, degree+Math.PI, true)
+  this.lineTo(p1.x, p1.y)
+  this.lineTo(p2.x, p2.y)
+  this.lineTo(footP.x, footP.y)
   this.closePath()
 
 

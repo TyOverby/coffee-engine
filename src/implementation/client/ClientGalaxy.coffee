@@ -13,21 +13,25 @@ class ClientGalaxy extends Galaxy
     pane = @camera.pane
 
     # Paint the whole screen blue
-    #pane.clear "#e7ebf2"
-    pane.clear "black"
+    pane.clear "#e7ebf2"
+    #pane.clear "black"
 
     # Start drawing the lines
-    #pane.strokeStyle = "#c4cde0"
-    pane.strokeStyle = "rgba(50,50,50,0.5)"
+    pane.strokeStyle = "#c4cde0"
+    #pane.strokeStyle = "rgba(50,50,50,0.5)"
     pane.lineWidth = 1
 
     startPos = @camera.pos.scaled(@camera.scale)
 
-    for x in [-startPos.x % @camera.scale ... @camera.getWidth()] by @camera.scale
+    scale = @camera.scale
+    if scale < 10
+      scale = 10
+
+    for x in [-startPos.x % scale ... @camera.getWidth()] by scale
       x = Math.floor(x) + 0.5
       pane.strokeLine {x:x,y:0}, {x: x, y: @camera.getHeight()}
 
-    for y in [-startPos.y % @camera.scale ... @camera.getHeight()] by @camera.scale
+    for y in [-startPos.y % scale ... @camera.getHeight()] by scale
       y = Math.floor(y) + 0.5
       pane.strokeLine {x: 0, y: y}, {x: @camera.getWidth(), y: y}
 

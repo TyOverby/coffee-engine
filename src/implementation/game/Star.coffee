@@ -18,7 +18,7 @@ class Star extends Entity
       dispPosition = camera.gameToScreen(@position)
 
       # The opaque ring
-      pane.fillStyle= @color.darkened(0).setOpacity(0.3).toString()
+      pane.fillStyle= @color.clone().setOpacity(0.5).toString()
       pane.fillCircle(dispPosition,size)
 
       # The big center circle
@@ -27,43 +27,34 @@ class Star extends Entity
 
       # vector towards the neighbors
       for neighbor in @neighbors
+        neighborDispPosition = camera.gameToScreen(neighbor.position)
         getFeet = (center, towards, size)->
           foot1 = towards.cornered().setMagnitude(size)
           foot2 = foot1.inverted()
+          return [center.plus(foot1), center.plus(foot2)]
 
-          center.
+        mainFeet = getFeet(@position, neighbor.position.minus(@position), @size)
+        newPos = @position.plus(neighbor.position.minus(@position).scaled(4/8))
+        halfFeet = getFeet(newPos, neighbor.position.minus(@position), (@size+neighbor.size)/2)
 
-        towardsNeighbor = neighbor.position.minus(this.position)
-        pane.strokeStyle = "green"
-        dispNeighbor = camera.gameToScreen(neighbor.position)
-
-        foot1 = towardsNeighbor.cornered().normalize().scale(size)
-        foot2 = foot1.inverted()
-
-        dist = dispNeighbor.minus(dispPosition).magnitude()
-        nextCenterV = towardsNeighbor.clone().setMagnitude(dist/3)
-        nextCenter = dispPosition.plus(nextCenterV)
-        nextTowards = nextCenterV.clone()
-
-        nFoot1 = nextTowards.cornered().normalize().scale(neighbor.size * camera.scale)
-        nFoot2 = nFoot1.inverted()
-
-        nPos1 = dispPosition.plus(nFoot1)
-        nPos2 = dispPosition.plus(nFoot2)
-        #pane.strokeStyle = "green"
-        #pane.strokeVector(dispPosition,nextCenter)
-        #pane.strokeVector(dispPosition, foot1)
-        #pane.strokeVector(dispPosition, foot2)
-
-        #pos1 = dispPosition.plus(foot1)
-        #pos2 = dispPosition.plus(foot2)
-
-        pane.drawDot(nPos1)
-        pane.drawDot(nPos2)
+        #pane.drawDot(camera.gameToScreen(foot)) for foot in mainFeet
+        #pane.drawDot(camera.gameToScreen(foot)) for foot in halfFeet
 
         pane.strokeStyle = "red"
-        pane.fillWedge(dispPosition, dispNeighbor, size, 10, foot2.getTheta(), foot2.getTheta(),0)
+        dist = camera.scale
+        pane.fillWedge(dispPosition,
+                        size,
+                        dist,
+                        mainFeet[1].minus(@position).getTheta(),
+                        camera.gameToScreen(halfFeet[0]),
+                        camera.gameToScreen(halfFeet[1]),
+                        camera.gameToScreen(mainFeet[1].plus(mainFeet[1].minus(@position).setMagnitude(dist/camera.scale))))
 
+        gradient = pane.createLinearGradient(dispPosition.x, dispPosition.y, neighborDispPosition.x, neighborDispPosition.y)
+        gradient.addColorStop(0, @color.clone().setOpacity(0.3).toString())
+        gradient.addColorStop(4/9, @color.averaged(neighbor.color,0.5).setOpacity(0.3).toString())
+        pane.fillStyle = gradient
+        pane.fill()
 
   addNeighbor: (star) ->
     @neighbors.push(star)
